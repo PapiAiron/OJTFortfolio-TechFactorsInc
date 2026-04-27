@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>LU Student Internship Portfolio — TechFactors Inc.</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --black:#0a0a0a;
+  --white:#f5f0e8;
+  --yellow:#f5c842;
+  --orange:#e8521a;
+  --red:#c41c1c;
+  --blue:#1a3ef5;
+  --b1:clamp(2px,0.25vw,3px) solid #0a0a0a;
+  --b2:clamp(3px,0.45vw,6px) solid #0a0a0a;
+  --mono:'Space Mono',monospace;
+  --display:'Bebas Neue',sans-serif;
+  --body:'DM Sans',sans-serif;
+  --tx:clamp(9px,0.95vw,12px);
+  --ts:clamp(10px,1.1vw,13px);
+  --tb:clamp(11px,1.3vw,15px);
+  --tl:clamp(20px,3vw,38px);
+  --txl:clamp(28px,5.5vw,72px);
+  --th:clamp(44px,9vw,148px);
+  --px:clamp(14px,3.5vw,70px);
+  --py:clamp(12px,2.5vh,30px);
+  --gap:clamp(8px,1.5vh,24px);
+}
+
+html,body{height:100%;overflow:hidden}
+body{background:var(--white);color:var(--black);font-family:var(--body);cursor:crosshair;-webkit-font-smoothing:antialiased}
+
+body::after{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:9999;opacity:.55;
+}
+
+.deck{height:100vh;height:100dvh;overflow-y:scroll;scroll-snap-type:y mandatory;scrollbar-width:none}
+.deck::-webkit-scrollbar{display:none}
+
+.slide{height:100vh;height:100dvh;width:100vw;scroll-snap-align:start;position:relative;overflow:hidden;display:flex;flex-direction:column}
+
+/* ── REUSABLE COMPONENTS ── */
+.ticker-bar{
+  flex-shrink:0;background:var(--yellow);color:var(--black);
+  font-family:var(--mono);font-size:var(--tx);font-weight:700;
+  padding:clamp(5px,1vh,11px) 0;white-space:nowrap;overflow:hidden;
+  border-bottom:var(--b2);
+}
+.ticker-inner{display:inline-block;animation:tick 22s linear infinite}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+.shead{
+  flex-shrink:0;padding:var(--py) var(--px);
+  border-bottom:var(--b2);
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+}
+.shead-left{display:flex;align-items:baseline;gap:clamp(8px,1vw,16px)}
+.snum{font-family:var(--mono);font-size:var(--tx);color:#888;flex-shrink:0}
+.stitle{font-family:var(--display);font-size:var(--txl);line-height:1}
+.wbadge{
+  flex-shrink:0;font-family:var(--mono);font-size:var(--tx);
+  text-transform:uppercase;letter-spacing:.1em;
+  padding:clamp(4px,0.7vh,9px) clamp(9px,1vw,16px);
+  border:var(--b1);color:#444;
+}
+
+.sbar{
+  flex-shrink:0;background:var(--black);border-top:var(--b2);
+  padding:clamp(7px,1.1vh,16px) var(--px);
+  display:flex;justify-content:space-between;align-items:center;
+  font-family:var(--mono);font-size:var(--tx);color:#555;gap:10px;
+}
+
+/* ── S1 TITLE ── */
+#s1{background:var(--black);color:var(--white)}
+#s1 .main{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;border-bottom:var(--b2);border-color:#333}
+#s1 .col-l{padding:var(--gap) var(--px) var(--gap);border-right:var(--b2);border-color:#333;display:flex;flex-direction:column;justify-content:space-between;min-height:0;overflow:hidden}
+#s1 .col-r{padding:var(--gap) var(--px);display:flex;flex-direction:column;justify-content:space-between;min-height:0;overflow:hidden}
+.eyebrow{font-family:var(--mono);font-size:var(--tx);color:#888;letter-spacing:.15em;text-transform:uppercase;margin-bottom:clamp(8px,1.5vh,20px);display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:'';width:clamp(16px,2vw,30px);height:2px;background:var(--orange);flex-shrink:0}
+#s1 h1{font-family:var(--display);font-size:var(--th);line-height:.92;color:var(--white)}
+#s1 h1 .acc{color:var(--yellow);display:block}
+.s1meta{font-family:var(--mono);font-size:var(--tx);color:#666;line-height:2.1}
+.s1meta span{color:var(--orange)}
+.bignum{font-family:var(--display);font-size:clamp(56px,13vw,210px);line-height:1;color:#1c1c1c;user-select:none}
+.tagcloud{display:flex;flex-wrap:wrap;gap:clamp(5px,0.7vw,10px)}
+.tag{border:clamp(1px,0.15vw,2px) solid #444;padding:clamp(4px,0.6vh,7px) clamp(7px,0.9vw,14px);font-family:var(--mono);font-size:var(--tx);color:#888;text-transform:uppercase;letter-spacing:.1em;transition:all .2s}
+.tag:hover{border-color:var(--yellow);color:var(--yellow)}
+#s1 .sbar{background:#111;border-color:#333;color:#555}
+
+/* ── S2 INTERNS ── */
+#s2{background:var(--white)}
+#s2 .shead{background:var(--black);color:var(--white)}
+#s2 .snum{color:#555}#s2 .stitle{color:var(--white)}
+.intern-grid{flex:1;min-height:0;display:grid;grid-template-columns:repeat(4,1fr)}
+.icard{border-right:var(--b1);padding:clamp(14px,2.5vw,36px) clamp(10px,1.8vw,26px);display:flex;flex-direction:column;position:relative;overflow:hidden;transition:background .25s}
+.icard:last-child{border-right:none}
+.icard::before{content:attr(data-n);position:absolute;top:-8px;right:-6px;font-family:var(--display);font-size:clamp(70px,11vw,150px);color:#f0ece4;line-height:1;pointer-events:none;transition:color .25s;z-index:0}
+.icard:hover{background:var(--yellow)}
+.icard:hover::before{color:#e8d430}
+.icard .inn{position:relative;z-index:1}
+.pframe{width:clamp(55px,9vw,120px);height:clamp(55px,9vw,120px);border:var(--b1);overflow:hidden;margin-bottom:var(--gap);flex-shrink:0}
+.icard:hover .pframe{outline:clamp(2px,0.3vw,4px) solid var(--black);outline-offset:3px}
+.pframe img{width:100%;height:100%;object-fit:cover;filter:grayscale(25%);transition:filter .25s;display:block}
+.icard:hover .pframe img{filter:none}
+.pfini{width:100%;height:100%;background:#222;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:clamp(18px,3vw,40px);color:var(--yellow)}
+.irole{font-family:var(--mono);font-size:var(--tx);text-transform:uppercase;letter-spacing:.12em;color:#888;margin-bottom:6px}
+.icard:hover .irole{color:#555}
+.iname{font-family:var(--body);font-weight:500;font-size:var(--tb);line-height:1.3}
+
+/* ── S3 SUPERVISORS ── */
+#s3{background:var(--orange);color:var(--white)}
+#s3 .shead{background:var(--black);color:var(--white)}
+#s3 .snum{color:#555}#s3 .stitle{color:var(--white)}
+.sup-grid{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr}
+.supcard{padding:clamp(20px,4vw,56px) var(--px);border-right:clamp(3px,0.4vw,6px) solid rgba(0,0,0,.2);display:flex;flex-direction:column;justify-content:center;gap:clamp(12px,2vh,26px);position:relative;overflow:hidden}
+.supcard:last-child{border-right:none}
+.supcard::after{content:'';position:absolute;bottom:clamp(-40px,-7vh,-60px);right:clamp(-40px,-6vw,-60px);width:clamp(90px,14vw,190px);height:clamp(90px,14vw,190px);border:clamp(3px,0.4vw,6px) solid rgba(255,255,255,.13);border-radius:50%}
+.supphoto{width:clamp(60px,9vw,130px);height:clamp(60px,9vw,130px);border:clamp(3px,0.4vw,6px) solid var(--white);overflow:hidden;flex-shrink:0}
+.supphoto img{width:100%;height:100%;object-fit:cover;display:block}
+.supini{width:100%;height:100%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:clamp(20px,4vw,50px);color:rgba(255,255,255,.5)}
+.suplbl{font-family:var(--mono);font-size:var(--tx);letter-spacing:.15em;text-transform:uppercase;opacity:.7}
+.supname{font-family:var(--display);font-size:clamp(22px,4vw,52px);line-height:1}
+.supbadge{display:inline-block;background:var(--black);color:var(--yellow);padding:clamp(5px,0.8vh,10px) clamp(9px,1.2vw,18px);font-family:var(--mono);font-size:var(--tx);letter-spacing:.08em;align-self:flex-start}
+
+/* ── S4 INTRO ── */
+#s4{background:var(--white)}
+#s4 .shead{background:var(--blue);color:var(--white)}
+#s4 .snum{color:rgba(255,255,255,.4)}#s4 .stitle{color:var(--white)}
+#s4 .body{flex:1;min-height:0;display:grid;grid-template-columns:2fr 1fr}
+.intro-l{padding:clamp(12px,2vh,28px) var(--px);border-right:var(--b1);overflow:auto;scrollbar-width:none}
+.intro-l::-webkit-scrollbar{display:none}
+.dropcap::first-letter{font-family:var(--display);font-size:clamp(40px,7vh,88px);line-height:.8;float:left;margin-right:clamp(5px,0.8vw,12px);color:var(--orange)}
+.ip{font-size:var(--tb);line-height:1.75;color:#333;margin-bottom:clamp(8px,1.5vh,18px)}
+.intro-r{padding:clamp(12px,2vh,28px) clamp(12px,2vw,36px);display:flex;flex-direction:column;gap:clamp(8px,1.5vh,20px);overflow:auto;scrollbar-width:none}
+.intro-r::-webkit-scrollbar{display:none}
+.sblock{border:var(--b1);padding:clamp(9px,1.4vh,20px);position:relative;flex-shrink:0}
+.sblock::before{content:'';position:absolute;top:4px;left:4px;right:-4px;bottom:-4px;border:var(--b1);z-index:-1}
+.sn{font-family:var(--display);font-size:clamp(32px,5.5vw,64px);line-height:1;color:var(--orange)}
+.sl{font-family:var(--mono);font-size:var(--tx);text-transform:uppercase;letter-spacing:.1em;color:#888;margin-top:4px}
+.divdr{height:2px;background:var(--black);flex-shrink:0}
+.kwlist{display:flex;flex-direction:column;gap:clamp(4px,0.8vh,10px)}
+.kw{font-family:var(--mono);font-size:var(--tx);display:flex;align-items:center;gap:9px;color:#444}
+.kw::before{content:'→';color:var(--orange);flex-shrink:0}
+
+/* ── WEEK SLIDES ── */
+.wslide{background:var(--white)}
+.wbody{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr}
+.pgrid{border-right:var(--b1);display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;min-height:0}
+.pgrid.twocol{grid-template-columns:1fr;grid-template-rows:1fr 1fr}
+.pcell{border-right:var(--b1);border-bottom:var(--b1);overflow:hidden;position:relative;background:#bbb;min-height:0}
+.pcell:nth-child(even){border-right:none}
+.pcell:nth-last-child(-n+2){border-bottom:none}
+.pcell.sp2{grid-column:span 2;border-right:none}
+.pcell img{width:100%;height:100%;object-fit:cover;object-position:center;filter:grayscale(15%) contrast(1.04);transition:filter .4s,transform .4s;display:block}
+.pcell:hover img{filter:none;transform:scale(1.04)}
+.phlbl{position:absolute;bottom:0;left:0;background:var(--black);color:var(--white);font-family:var(--mono);font-size:var(--tx);padding:clamp(3px,0.4vh,5px) clamp(6px,0.8vw,10px);text-transform:uppercase;letter-spacing:.1em;opacity:0;transition:opacity .3s}
+.pcell:hover .phlbl{opacity:1}
+.wtext{display:flex;flex-direction:column;min-height:0}
+.tblock{padding:clamp(12px,2.2vh,30px) clamp(14px,2.2vw,38px);border-bottom:var(--b1);flex:1;overflow:auto;scrollbar-width:none;min-height:0}
+.tblock::-webkit-scrollbar{display:none}
+.tblock:last-child{border-bottom:none}
+.blbl{font-family:var(--mono);font-size:var(--tx);text-transform:uppercase;letter-spacing:.2em;color:var(--orange);margin-bottom:clamp(7px,1.2vh,14px);display:flex;align-items:center;gap:8px}
+.blbl::before{content:'';width:clamp(12px,1.5vw,20px);height:2px;background:var(--orange)}
+.tblock p{font-size:var(--tb);line-height:1.7;color:#333}
+
+/* WEEK HEADER COLORS */
+#s5 .shead{background:var(--yellow)}#s5 .snum{color:#7a6010}#s5 .stitle{color:var(--black)}#s5 .wbadge{border-color:rgba(0,0,0,.25);color:#555}
+#s6 .shead{background:var(--black)}#s6 .snum{color:#555}#s6 .stitle{color:var(--white)}#s6 .wbadge{border-color:#444;color:#888}
+#s7 .shead{background:var(--orange)}#s7 .snum{color:rgba(255,255,255,.5)}#s7 .stitle{color:var(--white)}#s7 .wbadge{border-color:rgba(255,255,255,.4);color:rgba(255,255,255,.85)}
+#s8 .shead{background:var(--blue)}#s8 .snum{color:rgba(255,255,255,.5)}#s8 .stitle{color:var(--white)}#s8 .wbadge{border-color:rgba(255,255,255,.4);color:rgba(255,255,255,.85)}
+#s9 .shead{background:var(--red)}#s9 .snum{color:rgba(255,255,255,.5)}#s9 .stitle{color:var(--white)}#s9 .wbadge{border-color:rgba(255,255,255,.4);color:rgba(255,255,255,.85)}
+#s10 .shead{background:var(--black)}#s10 .snum{color:#555}#s10 .stitle{color:var(--yellow)}#s10 .wbadge{border-color:#444;color:var(--yellow)}
+
+/* ── S11 OUTRO ── */
+#s11{background:var(--black);color:var(--white)}
+#s11 .tbar{flex-shrink:0;background:var(--yellow);padding:clamp(8px,1.3vh,16px) var(--px);border-bottom:var(--b2);border-color:var(--black);font-family:var(--mono);font-size:var(--tx);color:var(--black);display:flex;justify-content:space-between;align-items:center;gap:10px}
+#s11 .omain{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:clamp(20px,4vh,60px) var(--px);position:relative;overflow:hidden}
+.bgtext{position:absolute;font-family:var(--display);font-size:clamp(70px,17vw,270px);line-height:1;color:#141414;white-space:nowrap;right:-20px;bottom:-10px;user-select:none;pointer-events:none}
+.eyebrow-o{font-family:var(--mono);font-size:var(--tx);color:#555;letter-spacing:.15em;text-transform:uppercase;margin-bottom:clamp(10px,1.8vh,22px);display:flex;align-items:center;gap:14px}
+.eyebrow-o::before{content:'';width:clamp(18px,2.5vw,38px);height:2px;background:var(--orange)}
+#s11 h2{font-family:var(--display);font-size:clamp(42px,8.5vw,148px);line-height:.9;margin-bottom:clamp(14px,2.5vh,38px);color:var(--white)}
+#s11 h2 .yl{color:var(--yellow)}
+.otext{font-size:var(--tb);line-height:1.8;color:#aaa;max-width:min(580px,80vw);margin-bottom:clamp(14px,2.5vh,38px)}
+.frow{display:flex;align-items:center;flex-wrap:wrap;gap:clamp(7px,1.1vw,18px)}
+.pill{border:clamp(1px,0.18vw,2px) solid #333;padding:clamp(5px,0.9vh,12px) clamp(10px,1.4vw,24px);font-family:var(--mono);font-size:var(--tx);color:#666;text-transform:uppercase;letter-spacing:.1em}
+.pill.hi{background:var(--orange);border-color:var(--orange);color:var(--white)}
+#s11 .sbar{background:#0d0d0d;border-color:#1a1a1a;color:#333}
+
+/* ── NAV ── */
+.nav{position:fixed;right:clamp(8px,1.4vw,22px);top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:clamp(6px,0.9vh,11px);z-index:1000}
+.nd{width:clamp(6px,0.55vw,8px);height:clamp(6px,0.55vw,8px);border:clamp(1px,0.15vw,2px) solid rgba(0,0,0,.22);cursor:pointer;transition:all .25s;background:transparent;flex-shrink:0}
+.nd.dk{border-color:rgba(255,255,255,.2)}
+.nd.act{background:var(--orange);border-color:var(--orange);transform:scale(1.5)}
+.nd:hover{border-color:var(--orange)}
+.prog{position:fixed;bottom:0;left:0;height:clamp(2px,0.3vh,4px);background:var(--orange);transition:width .4s ease;z-index:1000}
+
+/* ── RESPONSIVE ── */
+@media(max-width:680px){
+  #s1 .main{grid-template-columns:1fr}
+  #s1 .col-l{border-right:none;border-bottom:var(--b2);border-color:#333}
+  #s1 .col-r{display:none}
+  .intern-grid{grid-template-columns:repeat(2,1fr)}
+  .icard{border-bottom:var(--b1)}
+  .icard:nth-child(2n){border-right:none}
+  .icard:nth-child(2n+1){border-right:var(--b1)}
+  .icard:nth-last-child(-n+2){border-bottom:none}
+  .sup-grid{grid-template-columns:1fr}
+  .supcard{border-right:none;border-bottom:clamp(3px,0.4vw,6px) solid rgba(0,0,0,.2)}
+  .supcard:last-child{border-bottom:none}
+  #s4 .body{grid-template-columns:1fr}
+  .intro-l{border-right:none;border-bottom:var(--b1)}
+  .wbody{grid-template-columns:1fr;grid-template-rows:45% 1fr}
+  .pgrid{border-right:none;border-bottom:var(--b1)}
+  .wbadge{display:none}
+}
+@media(max-width:400px){
+  .intern-grid{grid-template-columns:1fr 1fr}
+  .stitle{font-size:clamp(18px,5vw,32px) !important}
+}
+
+/* ANIMATIONS */
+@keyframes aUp{from{transform:translateY(22px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes aIn{from{transform:translateX(-22px);opacity:0}to{transform:translateX(0);opacity:1}}
+@keyframes aFd{from{opacity:0}to{opacity:1}}
+.au{animation:aUp .55s cubic-bezier(.16,1,.3,1) both}
+.ai{animation:aIn .55s cubic-bezier(.16,1,.3,1) both}
+.af{animation:aFd .8s ease both}
+.d1{animation-delay:.1s}.d2{animation-delay:.22s}.d3{animation-delay:.34s}.d4{animation-delay:.48s}
+</style>
+</head>
+<body>
+
+<div class="prog" id="prog"></div>
+<nav class="nav" id="nav">
+  <div class="nd dk act" onclick="go(1)"></div>
+  <div class="nd dk" onclick="go(2)"></div>
+  <div class="nd" onclick="go(3)"></div>
+  <div class="nd" onclick="go(4)"></div>
+  <div class="nd" onclick="go(5)"></div>
+  <div class="nd" onclick="go(6)"></div>
+  <div class="nd" onclick="go(7)"></div>
+  <div class="nd" onclick="go(8)"></div>
+  <div class="nd" onclick="go(9)"></div>
+  <div class="nd" onclick="go(10)"></div>
+  <div class="nd dk" onclick="go(11)"></div>
+</nav>
+
+<div class="deck" id="deck">
+
+<!-- ═══ S1: TITLE ═══ -->
+<section class="slide" id="s1">
+  <div class="ticker-bar">
+    <span class="ticker-inner">
+      &nbsp;&nbsp;TECHFACTORS INC. ✦ INTERNSHIP PORTFOLIO ✦ LAGUNA UNIVERSITY ✦ APRIL 2026 ✦ EDUCATIONAL ROBOTICS ✦ SOFTWARE DEVELOPMENT ✦ TALA.SYS ✦ REACT + TYPESCRIPT ✦ FIREBASE ✦ mBOT2 ✦ PICO W ✦ ARDUINO ✦
+      &nbsp;&nbsp;TECHFACTORS INC. ✦ INTERNSHIP PORTFOLIO ✦ LAGUNA UNIVERSITY ✦ APRIL 2026 ✦ EDUCATIONAL ROBOTICS ✦ SOFTWARE DEVELOPMENT ✦ TALA.SYS ✦ REACT + TYPESCRIPT ✦ FIREBASE ✦ mBOT2 ✦ PICO W ✦ ARDUINO ✦
+    </span>
+  </div>
+  <div class="main" style="flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;border-bottom:var(--b2);border-color:#333">
+    <div class="col-l">
+      <div>
+        <div class="eyebrow ai">TECHFACTORS INC. — 2026</div>
+        <h1 class="ai d1">LU<br><span class="acc">INTERN</span>SHIP</h1>
+      </div>
+      <div class="s1meta ai d3">
+        <div>DATE &nbsp;&nbsp;<span>APRIL 27, 2026</span></div>
+        <div>COMPANY &nbsp;&nbsp;<span>TECHFACTORS INC.</span></div>
+        <div>SCHOOL &nbsp;&nbsp;<span>LAGUNA UNIVERSITY</span></div>
+        <div>PROJECT &nbsp;&nbsp;<span>TALA.SYS</span></div>
+      </div>
+    </div>
+    <div class="col-r">
+      <div class="bignum af d2">6<br>WKS</div>
+      <div class="tagcloud au d4">
+        <div class="tag">mBot2</div><div class="tag">Arduino</div>
+        <div class="tag">React</div><div class="tag">TypeScript</div>
+        <div class="tag">Firebase</div><div class="tag">Pico W</div>
+        <div class="tag">Robotics</div><div class="tag">UX</div>
+      </div>
+    </div>
+  </div>
+  <div class="sbar" style="background:#111;border-color:#333;color:#555">
+    <span>PORTFOLIO — 01 / 11</span>
+    <span>↓ SCROLL OR ARROW KEYS ↓</span>
+    <span>LU × TECHFACTORS INC.</span>
+  </div>
+</section>
+
+<!-- ═══ S2: INTERNS ═══ -->
+<section class="slide" id="s2">
+  <div class="shead" style="background:var(--black)">
+    <div class="shead-left">
+      <span class="snum" style="color:#555">02 /</span>
+      <span class="stitle" style="color:var(--white)">STUDENT INTERNS</span>
+    </div>
+  </div>
+  <div class="intern-grid" style="flex:1;min-height:0;display:grid;grid-template-columns:repeat(4,1fr)">
+    <div class="icard" data-n="01"><div class="inn">
+      <div class="pframe"><img src="Salabsab.png" alt="RS" onerror="this.outerHTML='<div class=pfini>RS</div>'"></div>
+      <div class="irole">Student Intern</div>
+      <div class="iname">Salabsab,<br>Richard Sean B.</div>
+    </div></div>
+    <div class="icard" data-n="02"><div class="inn">
+      <div class="pframe"><img src="Cantal.png" alt="MA" onerror="this.outerHTML='<div class=pfini>MA</div>'"></div>
+      <div class="irole">Student Intern</div>
+      <div class="iname">Cantal,<br>Marc Airon T.</div>
+    </div></div>
+    <div class="icard" data-n="03"><div class="inn">
+      <div class="pframe"><img src="Mangalindan.png" alt="GB" onerror="this.outerHTML='<div class=pfini>GB</div>'"></div>
+      <div class="irole">Student Intern</div>
+      <div class="iname">Mangalindan,<br>Giro B.</div>
+    </div></div>
+    <div class="icard" data-n="04"><div class="inn">
+      <div class="pframe"><img src="Canaling.png" alt="JD" onerror="this.outerHTML='<div class=pfini>JD</div>'"></div>
+      <div class="irole">Student Intern</div>
+      <div class="iname">Canaling,<br>Jasper D.</div>
+    </div></div>
+  </div>
+  <div class="sbar"><span>STUDENT INTERNS — 02 / 11</span><span>LAGUNA UNIVERSITY</span></div>
+</section>
+
+<!-- ═══ S3: SUPERVISORS ═══ -->
+<section class="slide" id="s3">
+  <div class="shead" style="background:var(--black)">
+    <div class="shead-left">
+      <span class="snum" style="color:#555">03 /</span>
+      <span class="stitle" style="color:var(--white)">SUPERVISORS</span>
+    </div>
+  </div>
+  <div class="sup-grid">
+    <div class="supcard">
+      <div class="supphoto"><img src="supervisor1.jpg" alt="FI" onerror="this.outerHTML='<div class=supini>FI</div>'"></div>
+      <div><div class="suplbl">Immediate Supervisor</div><div class="supname">Franz Dave<br>Irinco</div></div>
+      <div class="supbadge">IMMEDIATE SUPERVISOR</div>
+    </div>
+    <div class="supcard">
+      <div class="supphoto"><img src="supervisor2.jpg" alt="CV" onerror="this.outerHTML='<div class=supini>CV</div>'"></div>
+      <div><div class="suplbl">Technical Consultant</div><div class="supname">Carlo<br>Villamiel</div></div>
+      <div class="supbadge">TECHNICAL CONSULTANT</div>
+    </div>
+  </div>
+  <div class="sbar"><span>SUPERVISORS — 03 / 11</span><span>TECHFACTORS INC.</span></div>
+</section>
+
+<!-- ═══ S4: INTRO ═══ -->
+<section class="slide" id="s4">
+  <div class="shead" style="background:var(--blue)">
+    <div class="shead-left">
+      <span class="snum" style="color:rgba(255,255,255,.4)">04 /</span>
+      <span class="stitle" style="color:var(--white)">INTRODUCTION</span>
+    </div>
+  </div>
+  <div class="body" style="flex:1;min-height:0;display:grid;grid-template-columns:2fr 1fr">
+    <div class="intro-l">
+      <p class="ip dropcap">This portfolio documents our enriching internship experience at TechFactors Inc., a leading technology company specializing in educational robotics and equipment management. Over the course of 6 weeks, we immersed ourselves in a professional environment, gaining valuable insights into software development, project management, and industry best practices.</p>
+      <p class="ip">During our internship, we developed an Equipment Audit System as our culminating project, applying theoretical knowledge to real-world challenges. This experience honed our technical skills and fostered our ability to collaborate, adapt to evolving requirements, and deliver solutions that meet operational needs.</p>
+      <p class="ip">The internship reinforced the importance of the industry–academe partnership in bridging the gap between education and employment, equipping us with the competencies necessary to thrive in the competitive tech landscape.</p>
+    </div>
+    <div class="intro-r">
+      <div class="sblock"><div class="sn">6</div><div class="sl">Weeks of Immersion</div></div>
+      <div class="sblock"><div class="sn">4</div><div class="sl">Student Interns</div></div>
+      <div class="sblock"><div class="sn">1</div><div class="sl">Production System Delivered</div></div>
+      <div class="divdr"></div>
+      <div class="kwlist">
+        <div class="kw">Hardware &amp; Robotics</div>
+        <div class="kw">Full-Stack Dev (React / TS)</div>
+        <div class="kw">Firebase Backend</div>
+        <div class="kw">UX / Glassmorphism</div>
+        <div class="kw">Field Deployment</div>
+        <div class="kw">Professional Collaboration</div>
+      </div>
+    </div>
+  </div>
+  <div class="sbar"><span>INTRODUCTION — 04 / 11</span><span>TECHFACTORS INC. × LAGUNA UNIVERSITY</span></div>
+</section>
+
+<!-- ═══ S5: WEEK 1 ═══ -->
+<section class="slide wslide" id="s5">
+  <div class="shead">
+    <div class="shead-left"><span class="snum">05 /</span><span class="stitle">MBOT2 ASSEMBLY &amp; CODING</span></div>
+    <div class="wbadge">WEEK 01 — FEB 23–26</div>
+  </div>
+  <div class="wbody">
+    <div class="pgrid">
+      <div class="pcell"><img src="week1/1.jpg" alt="" onerror="this.remove()"><div class="phlbl">Assembly</div></div>
+      <div class="pcell"><img src="week1/2.jpg" alt="" onerror="this.remove()"><div class="phlbl">Calibration</div></div>
+      <div class="pcell"><img src="week1/3.jpg" alt="" onerror="this.remove()"><div class="phlbl">Coding</div></div>
+      <div class="pcell"><img src="week1/4.jpg" alt="" onerror="this.remove()"><div class="phlbl">Testing</div></div>
+    </div>
+    <div class="wtext">
+      <div class="tblock"><div class="blbl">Narrative</div><p>The first week focused on getting acquainted with the next generation of educational robotics. I was tasked with the physical assembly and software calibration of the mBot2. Unlike standard kits, the mBot2 requires a more precise touch to ensure all CyberPi sensors are correctly seated. Once complete, I moved into the programming phase using Makeblock's ecosystem, eventually syncing the robot with a Bluetooth controller for manual override testing.</p></div>
+      <div class="tblock"><div class="blbl">Experiences &amp; Lessons</div><p>I learned that hardware is only as good as its calibration. Assembling the mBot2 taught me the importance of cable management in robotics to prevent mechanical interference. On the coding side, I discovered how to map Bluetooth inputs to specific motor speeds, deepening my understanding of real-time remote-control system logic.</p></div>
+    </div>
+  </div>
+  <div class="sbar"><span>WEEK 1 — 05 / 11</span><span>mBot2 · CyberPi · Makeblock · Bluetooth</span></div>
+</section>
+
+<!-- ═══ S6: WEEK 2 ═══ -->
+<section class="slide wslide" id="s6">
+  <div class="shead">
+    <div class="shead-left"><span class="snum">06 /</span><span class="stitle">MBOT1 &amp; PICO W PROGRAMMING</span></div>
+    <div class="wbadge">WEEK 02 — MAR 2–13</div>
+  </div>
+  <div class="wbody">
+    <div class="pgrid">
+      <div class="pcell"><img src="week2/1.jpg" alt="" onerror="this.remove()"><div class="phlbl">mBot1</div></div>
+      <div class="pcell"><img src="week2/2.jpg" alt="" onerror="this.remove()"><div class="phlbl">Pico W</div></div>
+      <div class="pcell"><img src="week2/3.jpg" alt="" onerror="this.remove()"><div class="phlbl">Thonny IDE</div></div>
+      <div class="pcell"><img src="week2/4.jpg" alt="" onerror="this.remove()"><div class="phlbl">Arduino IDE</div></div>
+    </div>
+    <div class="wtext">
+      <div class="tblock"><div class="blbl">Narrative</div><p>This week involved significant context-switching between different microcontrollers. I worked on the mBot1, focusing on its Arduino-based foundation, then shifted to the Raspberry Pi Pico W. This was a test of adaptability — jumping between block-based/Python logic of the mBots and the C/C++ environment required for the Pico W and Arduino IDE.</p></div>
+      <div class="tblock"><div class="blbl">Experiences &amp; Lessons</div><p>The biggest takeaway was learning to navigate Thonny and Arduino IDE simultaneously. I learned to read schematics for the Pico W to ensure correct pinouts. This week solidified my understanding of how Python vs. C++ are each optimized for different hardware constraints and performance requirements.</p></div>
+    </div>
+  </div>
+  <div class="sbar"><span>WEEK 2 — 06 / 11</span><span>mBot1 · Raspberry Pi Pico W · Thonny · Arduino IDE</span></div>
+</section>
+
+<!-- ═══ S7: WEEK 3 ═══ -->
+<section class="slide wslide" id="s7">
+  <div class="shead">
+    <div class="shead-left"><span class="snum">07 /</span><span class="stitle">INITIAL AUDIT SYSTEM PRESENTATION</span></div>
+    <div class="wbadge">WEEK 03 — MAR 16–19</div>
+  </div>
+  <div class="wbody">
+    <div class="pgrid">
+      <div class="pcell sp2"><img src="week3/1.jpg" alt="" onerror="this.remove()"><div class="phlbl">Presentation</div></div>
+      <div class="pcell"><img src="week3/2.jpg" alt="" onerror="this.remove()"><div class="phlbl">Prototype</div></div>
+      <div class="pcell"><img src="week3/3.jpg" alt="" onerror="this.remove()"><div class="phlbl">Workshop</div></div>
+    </div>
+    <div class="wtext">
+      <div class="tblock"><div class="blbl">Narrative</div><p>We officially shifted from hardware to software this week. Our team presented the initial concept and HTML prototype of the Equipment Auditing System to department heads. This high-stakes meeting saw us defend our choice of React + Vite and TypeScript. The session became a collaborative workshop outlining specific needs such as distinct access levels for the RnD and Academy teams.</p></div>
+      <div class="tblock"><div class="blbl">Experiences &amp; Lessons</div><p>I learned that "System Design" is a conversation, not just instructions. I gained experience translating non-technical requirements — like "we need to monitor but not edit" — into technical logic such as Read-Only Admin Access Levels. This highlighted the value of a flexible frontend architecture that accommodates feature creep early in the development cycle.</p></div>
+    </div>
+  </div>
+  <div class="sbar"><span>WEEK 3 — 07 / 11</span><span>React · Vite · TypeScript · System Design</span></div>
+</section>
+
+<!-- ═══ S8: WEEK 4A ═══ -->
+<section class="slide wslide" id="s8">
+  <div class="shead">
+    <div class="shead-left"><span class="snum">08 /</span><span class="stitle">NEW ERA UNIVERSITY DEPLOYMENT</span></div>
+    <div class="wbadge">WEEK 04 — MAR 23–27</div>
+  </div>
+  <div class="wbody">
+    <div class="pgrid">
+      <div class="pcell sp2"><img src="week4/1.jpg" alt="" onerror="this.remove()"><div class="phlbl">Deployment</div></div>
+      <div class="pcell"><img src="week4/2.jpg" alt="" onerror="this.remove()"><div class="phlbl">Demo</div></div>
+      <div class="pcell"><img src="week4/3.jpg" alt="" onerror="this.remove()"><div class="phlbl">Students</div></div>
+    </div>
+    <div class="wtext">
+      <div class="tblock"><div class="blbl">Narrative</div><p>The team traveled to New Era University at Commonwealth, Quezon City, for a full-scale deployment and demo. We showcased mBot2 and Arduino projects to both elementary and high school students. Beyond demonstrating the robots, I explained the logic behind the projects and participated as a judge for their application development competition — requiring constant on-the-fly troubleshooting.</p></div>
+      <div class="tblock"><div class="blbl">Experiences &amp; Lessons</div><p>This week taught me the "soft skills" of engineering. It's one thing to make a robot work in a quiet lab; another to keep it running in a crowded room of excited students. I learned to troubleshoot connectivity issues on the fly and to simplify complex technical concepts for younger audiences. Exhausting, but incredibly rewarding.</p></div>
+    </div>
+  </div>
+  <div class="sbar"><span>WEEK 4 — 08 / 11</span><span>New Era University · Commonwealth, Quezon City</span></div>
+</section>
+
+<!-- ═══ S9: WEEK 4B ═══ -->
+<section class="slide wslide" id="s9">
+  <div class="shead">
+    <div class="shead-left"><span class="snum">09 /</span><span class="stitle">NEU DEPLOYMENT — CONTINUED</span></div>
+    <div class="wbadge">WEEK 04 — MAR 23–27</div>
+  </div>
+  <div class="wbody">
+    <div class="pgrid">
+      <div class="pcell sp2"><img src="week4/5.jpg" alt="" onerror="this.remove()"><div class="phlbl">Competition</div></div>
+      <div class="pcell"><img src="week4/6.jpg" alt="" onerror="this.remove()"><div class="phlbl">Judging</div></div>
+      <div class="pcell"><img src="week4/4.jpg" alt="" onerror="this.remove()"><div class="phlbl">Team</div></div>
+    </div>
+    <div class="wtext">
+      <div class="tblock"><div class="blbl">Narrative (cont.)</div><p>Beyond the robotics showcase, we participated in judging an application development competition for high school students. Evaluating their projects required balancing encouragement with constructive critique — applying rubrics fairly and giving students actionable feedback. This role reversal from student to evaluator gave us a unique perspective on the tech education pipeline.</p></div>
+      <div class="tblock"><div class="blbl">Key Takeaways</div><p>Seeing technology in the hands of end-users was transformative. Young students' curiosity and enthusiasm reinforced why building good, accessible tech matters. The ability to contextualize engineering concepts for a non-technical audience is a professional skill as critical as writing clean code.</p></div>
+    </div>
+  </div>
+  <div class="sbar"><span>WEEK 4 (CONT.) — 09 / 11</span><span>New Era University · App Dev Competition · Judging</span></div>
+</section>
+
+<!-- ═══ S10: WEEK 6 ═══ -->
+<section class="slide wslide" id="s10">
+  <div class="shead">
+    <div class="shead-left"><span class="snum">10 /</span><span class="stitle">FINAL PRESENTATION — TALA.SYS</span></div>
+    <div class="wbadge">WEEK 06 — APR 10–17</div>
+  </div>
+  <div class="wbody">
+    <div class="pgrid twocol">
+      <div class="pcell"><img src="week6/1.jpg" alt="" onerror="this.remove()"><div class="phlbl">Final Demo</div></div>
+      <div class="pcell"><img src="week6/2.jpg" alt="" onerror="this.remove()"><div class="phlbl">System Review</div></div>
+    </div>
+    <div class="wtext">
+      <div class="tblock"><div class="blbl">Narrative</div><p>The internship culminated in the final presentation of our web application, officially titled TALA.sys. We demonstrated the full end-to-end workflow: from manual account creation in Firebase to role-specific auditing dashboards built with React and TypeScript. Department heads reviewed the progress, tested the access logic, and expressed great satisfaction with the system's stability and Glassmorphism design language.</p></div>
+      <div class="tblock"><div class="blbl">Experiences &amp; Lessons</div><p>I learned that the last 10% of a project — polishing, bug fixes, and UI tweaks — is what makes it feel production-ready. Seeing the department heads' positive reaction taught me that UX is just as important as backend logic. The core system was successfully validated for deployment, with only minor final adjustments noted.</p></div>
+    </div>
+  </div>
+  <div class="sbar"><span>WEEK 6 — 10 / 11</span><span>TALA.SYS · React · TypeScript · Firebase · Glassmorphism</span></div>
+</section>
+
+<!-- ═══ S11: OUTRO ═══ -->
+<section class="slide" id="s11">
+  <div class="tbar">
+    <span>TECHFACTORS INC. — LAGUNA UNIVERSITY — APRIL 2026</span>
+    <span>END OF PORTFOLIO</span>
+  </div>
+  <div class="omain">
+    <div class="bgtext">THANK<br>YOU</div>
+    <div class="eyebrow-o">END OF PRESENTATION</div>
+    <h2>THANK<br>YOU<br><span class="yl">SIRS!!</span></h2>
+    <p class="otext">This experience at TechFactors Inc. has been invaluable in shaping our professional development. We are grateful for the opportunity to learn, grow, and contribute to meaningful projects in a supportive, innovative environment.</p>
+    <div class="frow">
+      <div class="pill hi">Laguna University</div>
+      <div class="pill">TechFactors Inc.</div>
+      <div class="pill">April 2026</div>
+    </div>
+  </div>
+  <div class="sbar" style="background:#0d0d0d;border-color:#1a1a1a;color:#333">
+    <span>PORTFOLIO — 11 / 11</span><span>END</span>
+  </div>
+</section>
+
+</div>
+
+<script>
+const deck=document.getElementById('deck');
+const dots=document.querySelectorAll('.nd');
+const prog=document.getElementById('prog');
+const slides=document.querySelectorAll('.slide');
+const N=slides.length;
+const dkSet=new Set([1,2,6,11]);
+
+function go(n){document.getElementById('s'+n).scrollIntoView({behavior:'smooth'})}
+
+function update(idx){
+  dots.forEach((d,i)=>{
+    d.classList.toggle('act',i===idx);
+    d.classList.toggle('dk',dkSet.has(i+1));
+  });
+  prog.style.width=(idx/(N-1)*100)+'%';
+}
+
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting&&e.intersectionRatio>=.5)
+      update(Array.from(slides).indexOf(e.target));
+  });
+},{threshold:.5});
+slides.forEach(s=>io.observe(s));
+
+document.addEventListener('keydown',e=>{
+  const cur=Math.round(deck.scrollTop/window.innerHeight);
+  if(e.key==='ArrowDown'||e.key==='PageDown'){e.preventDefault();go(Math.min(cur+2,N))}
+  else if(e.key==='ArrowUp'||e.key==='PageUp'){e.preventDefault();go(Math.max(cur,1))}
+  else if(e.key>='1'&&e.key<='9')go(+e.key);
+  else if(e.key==='0')go(10);
+});
+
+update(0);
+</script>
+</body>
+</html>
